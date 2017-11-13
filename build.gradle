@@ -115,9 +115,14 @@ dependencies {
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.14'
     compile group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '3.14'
 	
-	//compile  "io.vertx:vertx-web:3.4.2"
 	//动态代理 类代理
 	compile group: 'cglib', name: 'cglib', version: '3.1'
+	
+	//http 
+	compile group: 'org.apache.httpcomponents',name: 'httpclient',version: '4.5.2'
+	compile group: 'org.jsoup',name: 'jsoup',version: '1.10.2'
+	
+	
 	
     compile 'org.slf4j:slf4j-api:1.7.21'
 
