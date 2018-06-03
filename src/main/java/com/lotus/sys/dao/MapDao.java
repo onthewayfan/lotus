@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.lotus.utils.Page;
+import com.lotus.base.util.Page;
 
 @Mapper
 public interface MapDao {

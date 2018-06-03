@@ -7,12 +7,14 @@
  */
 
 // Apply the java-library plugin to add support for Java Library
- configurations.all {
+configurations.all {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 buildscript {
     ext {
       springBootVersion = "1.5.2.BUILD-SNAPSHOT"
+      
+      hadoopVersion = "2.9.0"
     }
     repositories {
         //maven
@@ -122,9 +124,21 @@ dependencies {
 	compile group: 'org.apache.httpcomponents',name: 'httpclient',version: '4.5.2'
 	compile group: 'org.jsoup',name: 'jsoup',version: '1.10.2'
 	
-	
-	
-    compile 'org.slf4j:slf4j-api:1.7.21'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    
+    //hadoop
+    //compile group: 'org.apache.hadoop', name: 'hadoop-common', version: "$hadoopVersion"
+    //compile group: 'org.apache.hadoop', name: 'hadoop-core', version: "0.20.2"
+    //compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: "$hadoopVersion"
+    
+    //compile group: 'org.apache.hadoop', name: 'hadoop-client', version: "$hadoopVersion"
+    
+    //compile ("org.apache.hadoop:hadoop-client:$hadoopVersion"){
+    //   exclude group: 'org.slf4j',module: 'slf4j-log4j12'
+    //}
+   //compile group: 'org.apache.hadoop', name: 'hadoop-mapreduce-client-core', version: "$hadoopVersion"
+   
 
     //testCompile 'junit:junit:4.12'
 	testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"

@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lotus.base.util.Page;
 import com.lotus.sys.dao.MapDao;
 import com.lotus.sys.service.MapService;
-import com.lotus.utils.Page;
 
 
 @Service

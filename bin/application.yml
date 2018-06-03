@@ -8,16 +8,18 @@ spring:
       datasource: 
                type: com.alibaba.druid.pool.DruidDataSource
                driver-class-name: com.mysql.jdbc.Driver    
-               url: jdbc:mysql://127.0.0.1:3306/lotus?useUnicode=true&characterEncoding=utf-8
+               #url: jdbc:mysql://127.0.0.1:3306/lotus?useUnicode=true&characterEncoding=utf-8
+               url: jdbc:mysql://127.0.0.1:8066/TESTDB?useUnicode=true&characterEncoding=utf-8
                username: root
-               password: root123456
+               #password: root123456
+               password: 123456  
                initialSize: 5               #初始化连接大小
                minIdle: 5                   #最小连接数
                maxAcive: 20                 #最大连接数
                maxWait: 80000               #配置获取连接等待的超时时间 单位毫秒
                timeBetweenEvictionRunsMillis: 80000 #配置间隔多久才进行一次检查，检测需要关闭的空闲连接
                minEvictableIdleTimeMillis: 40000 #配置连接池的最小生存的时间
-               validationQuery: select 1 from dual
+               validationQuery: select user()
                testWhileIdle: true
                testOnBorrow: false
                testOnReturn: false
@@ -41,13 +43,44 @@ spring:
                 max-active: 8  # 连接池最大连接数（使用负值表示没有限制）
                 max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
                 max-idle: 8  # 连接池中的最大空闲连接
-                min-idle: 0 # 连接池中的最小空闲连接                   
+                min-idle: 0 # 连接池中的最小空闲连接             
+                
+      mvc: 
+         view: 
+         prefix: templates
+         suffix: .html
+
+# 多数据源
+custom: 
+      datasource: 
+                names: ds1,ds2,ds3
+                ds1: 
+                   type: com.alibaba.druid.pool.DruidDataSource
+                   driver-class-name: com.mysql.jdbc.Driver
+                   url: jdbc:mysql://127.0.0.1:3066/db1?useUnicode=true&characterEncoding=utf-8
+                   name: root
+                   password: root123456
+                ds2: 
+                   type: com.alibaba.druid.pool.DruidDataSource
+                   driver-class-name: com.mysql.jdbc.Driver
+                   url: jdbc:mysql://127.0.0.1:3066/db2?useUnicode=true&characterEncoding=utf-8
+                   name: root
+                   password: root123456
+                ds3: 
+                   type: com.alibaba.druid.pool.DruidDataSource
+                   driver-class-name: com.mysql.jdbc.Driver
+                   url: jdbc:mysql://127.0.0.1:3066/db3?useUnicode=true&characterEncoding=utf-8
+                   name: root
+                   password: root123456
+
+                        
+                      
 #======================================log =====================================================
 logging: 
         level: 
-              com.lotus: debug
+              com.lotus: info
               org.springframework: info
               org.springframework.jdbc.core.JdbcTemplate: debug
-              com.alibaba.druid: debug
+              com.alibaba.druid: info
         path: /opt/applog
         file: ../logs/lotus.log
