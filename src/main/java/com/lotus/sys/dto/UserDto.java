@@ -47,8 +47,9 @@ public class UserDto implements Serializable{
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public UserDto setName(String name) {
 		this.name = name;
+		return this;
 	}
 	public Integer getAge() {
 		return age;
