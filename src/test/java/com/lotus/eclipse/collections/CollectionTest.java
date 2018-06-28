@@ -24,8 +24,8 @@ public class CollectionTest {
 		people.add(new Person("Bob", 52));
 		people.add(new Person("Carol", 35));
 		
-		List.of(new Person("Alice", 19),
-				new Person("Bob", 52), new Person("Carol", 35)).stream();
+//		List.of(new Person("Alice", 19),
+//				new Person("Bob", 52), new Person("Carol", 35)).stream();
 
 		List<String> namesOver21 = people.stream()               // Bun
 				       .filter(person -> person.getAge() > 21)  // Meat
