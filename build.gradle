@@ -12,10 +12,11 @@ configurations.all {
 }
 buildscript {
     ext {
-      springBootVersion = "1.5.2.BUILD-SNAPSHOT"
-      
+      springBootVersion = "2.1.0.BUILD-SNAPSHOT"
       hadoopVersion = "2.9.0"
+      poiVersion = "3.14"
     }
+    //闭包，声明了jcenter()的配置
     repositories {
         //maven
         maven { url "https://repo.spring.io/libs-release" }
@@ -32,11 +33,13 @@ buildscript {
 	    // ivy       
 		//ivy{      url "..."  }   
     }
-    dependencies {        
+    //dependencies闭包，声明了一个Gradle插件
+    dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
+//使用 xxx
 apply plugin: 'java'
 
 apply plugin: 'eclipse'
@@ -99,12 +102,12 @@ dependencies {
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.2.2'
     //compile "com.oracle:ojdbc14:*.*.*"
 	
-	//orm mybatis 3.2.8    1.2.3
+	//orm mybatis 3.2.8    1.3.2
 	//compile group: 'org.mybatis', name: 'mybatis' ,version: '3.2.8'
 	//compile group: 'org.mybatis', name: 'mybatis-spring' ,version: '1.2.3'
-	compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter' ,version: '1.1.1'
+	compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter' ,version: '1.3.2'
 	
-	//pool Druid   1.0.18
+	//pool Druid   1.0.26
 	compile group: 'com.alibaba', name: 'druid', version: '1.0.26'
 	
     //json
@@ -113,9 +116,9 @@ dependencies {
     //io
     compile "commons-fileupload:commons-fileupload:1.3.1"
     // poi   
-    compile group: 'org.apache.poi', name: 'poi', version: '3.14'
-    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.14'
-    compile group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '3.14'
+    compile group: 'org.apache.poi', name: 'poi', version: "$poiVersion"
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: "$poiVersion"
+    compile group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: "$poiVersion"
 	
 	//动态代理 类代理
 	compile group: 'cglib', name: 'cglib', version: '3.1'
@@ -140,7 +143,13 @@ dependencies {
    //compile group: 'org.apache.hadoop', name: 'hadoop-mapreduce-client-core', version: "$hadoopVersion"
    
 
-    //testCompile 'junit:junit:4.12'
+    //testCompile
+    testCompile("junit:junit:4.12") {
+        exclude group:'org.hamcrest', module:'hamcrest-core'
+    }
+    testCompile("org.mockito:mockito-core:2.18.0") {
+        exclude group:'org.hamcrest', module:'hamcrest-core'
+    }
 	testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
 
