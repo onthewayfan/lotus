@@ -8,11 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class Stratup {
+public class AppStratup {
 	
 	public static void main(String[] args) {
 		
-		SpringApplication.run(Stratup.class, args);
+		SpringApplication.run(AppStratup.class, args);
 		
 	}
 	
