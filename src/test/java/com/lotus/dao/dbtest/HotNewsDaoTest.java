@@ -1,19 +1,18 @@
 package com.lotus.dao.dbtest;
 
-import java.util.List;
-import java.util.Map;
-
+import com.lotus.AppStratup;
+import com.lotus.test.dao.HotNewsDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.lotus.Stratup;
-import com.lotus.test.dao.HotNewsDao;
+import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=Stratup.class)
+@SpringBootTest(classes=AppStratup.class)
 public class HotNewsDaoTest {
 	
 	@Autowired

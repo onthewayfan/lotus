@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -24,6 +25,7 @@ public class DataBaseConfiguration {
 
 	@Bean
 	@ConfigurationProperties(prefix = "spring.datasource")
+	@Primary
 	public DataSource dataSource(){
 		return new DruidDataSource();
 	}
