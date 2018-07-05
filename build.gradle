@@ -12,16 +12,20 @@ configurations.all {
 }
 buildscript {
     ext {
-      springBootVersion = "2.1.0.BUILD-SNAPSHOT"
-      hadoopVersion = "2.9.0"
-      poiVersion = "3.14"
+        springReleaseRepo = "https://repo.spring.io/libs-release"
+        springSnapshotRepo = "http://repo.spring.io/snapshot"
+        springMilestoneRepo = "http://repo.spring.io/milestone"
+
+        springBootVersion = "2.1.0.BUILD-SNAPSHOT"
+        hadoopVersion = "2.9.0"
+        poiVersion = "3.14"
     }
     //闭包，声明了jcenter()的配置
     repositories {
         //maven
-        maven { url "https://repo.spring.io/libs-release" }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
+        maven { url springReleaseRepo}
+        maven { url springSnapshotRepo }
+        maven { url springMilestoneRepo }
 		 
 //	    mavenCentral()
 	    mavenLocal()
@@ -39,37 +43,39 @@ buildscript {
     }
 }
 
-//使用 xxx
-apply plugin: 'java'
+def vJavaLang = '1.8'
+
+wrapper.gradleVersion = '4.8'
+
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+version = '1.0.0.BUILD-SNAPSHOT'
+
+//使用 xxx
+apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+//User JDK 1.8
+sourceCompatibility = vJavaLang
+targetCompatibility = vJavaLang
 
 //apply plugin: 'war'
-
-jar {
-    baseName = 'lotus'
-    version =  '0.0.1-SNAPSHOT'
-}
-
 //war {
 //    baseName = 'lotus'
-//   version =  '0.0.1-SNAPSHOT'
+//   version =  version
 //}
-
-//User JDK 1.8
-sourceCompatibility = 1.8 
-targetCompatibility = 1.8
-
+jar {
+    baseName = 'lotus'
+    version =  version
+}
 
 repositories {
     // Use 'jcenter' for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
         //maven
-        maven { url "https://repo.spring.io/libs-release" }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
+        maven { url springReleaseRepo }
+        maven { url springSnapshotRepo }
+        maven { url springMilestoneRepo }
 		
 //	    mavenCentral()
 	    mavenLocal()
@@ -90,10 +96,14 @@ dependencies {
     compile "org.springframework.boot:spring-boot-devtools:$springBootVersion" 
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion"
     
-    compile "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
+    //compile "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion"
  	//compile "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
     //compile "org.springframework.session:spring-session-data-redis"
+
+    compile "org.springframework.boot:spring-boot-starter-activemq:$springBootVersion"
+
+
  	//dom xml
     compile "dom4j:dom4j:1.6.1"
     
@@ -133,6 +143,12 @@ dependencies {
     //collections
     compile 'org.eclipse.collections:eclipse-collections-api:9.2.0'
     compile 'org.eclipse.collections:eclipse-collections:9.2.0'
+
+    //mq
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-core
+    compile group: 'org.apache.activemq', name: 'activemq-core', version: '5.7.0'
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-spring
+    compile group: 'org.apache.activemq', name: 'activemq-spring', version: '5.15.4'
 
     //hadoop
     //compile group: 'org.apache.hadoop', name: 'hadoop-common', version: "$hadoopVersion"

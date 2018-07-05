@@ -1,4 +1,4 @@
-package com.lotus;
+package com.lotus.stream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
