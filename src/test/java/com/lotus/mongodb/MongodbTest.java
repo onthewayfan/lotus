@@ -31,6 +31,7 @@ public class MongodbTest {
             
         } catch (MongoException e) {
             // handle MongoDB exception
+            e.printStackTrace();
         }
     
 	}

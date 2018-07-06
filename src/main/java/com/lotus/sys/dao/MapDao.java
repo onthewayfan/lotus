@@ -6,8 +6,10 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.lotus.base.util.Page;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface MapDao {
 	
 	public List<Map> getMap();

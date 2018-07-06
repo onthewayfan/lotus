@@ -28,7 +28,7 @@ import java.util.Map;
 @Configuration
 public class MultipleDataSourceConfiguration implements BeanDefinitionRegistryPostProcessor,EnvironmentAware {
 
-    private  ScopeMetadataResolver scopeMetadataResolver = new AnnotationScopeMetadataResolver();
+    private ScopeMetadataResolver scopeMetadataResolver = new AnnotationScopeMetadataResolver();
 
     private BeanNameGenerator beanNameGenerator = new AnnotationBeanNameGenerator();
 
@@ -63,9 +63,8 @@ public class MultipleDataSourceConfiguration implements BeanDefinitionRegistryPo
             mutablePropertyValues = beanDefinition.getPropertyValues();
             DataSourceProperties dataSourceProperties = entry.getValue();
             mutablePropertyValues.addPropertyValue("username",dataSourceProperties.getName());
-            mutablePropertyValues.addPropertyValue("userpassword",dataSourceProperties.getPassword());
+            mutablePropertyValues.addPropertyValue("password",dataSourceProperties.getPassword());
             mutablePropertyValues.addPropertyValue("url",dataSourceProperties.getUrl());
-            mutablePropertyValues.addPropertyValue("type",dataSourceProperties.getType());
             mutablePropertyValues.addPropertyValue("driverClassName",dataSourceProperties.getDriverClassName());
         }
     }
@@ -76,12 +75,27 @@ public class MultipleDataSourceConfiguration implements BeanDefinitionRegistryPo
         String names = environment.getProperty(topStr+"names");
         String[] dsPrefixs = names.split(",");
         for (String dsPrefix : dsPrefixs){
-            String temp = environment.getProperty(topStr+dsPrefix);
-            DataSourceProperties dataSourceProperties = environment.getProperty(topStr+dsPrefix,DataSourceProperties.class);
+            DataSourceProperties dataSourceProperties = this.getDataSourceProperties(environment,topStr+dsPrefix+".");
             if (dataSourceProperties==null){
                 break;
             }
             dataSourceMap.put(dsPrefix,dataSourceProperties);
         }
+    }
+
+    private DataSourceProperties getDataSourceProperties(Environment environment,String prefix){
+        DataSourceProperties dataSourceProperties = new DataSourceProperties();
+        dataSourceProperties.setName(environment.getProperty(prefix+"name"));
+        dataSourceProperties.setPassword(environment.getProperty(prefix+"password"));
+        Class<? extends DataSource> type = null;
+        try {
+            type = (Class<? extends DataSource>) Class.forName(environment.getProperty(prefix+"type"));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        dataSourceProperties.setType(type);
+        dataSourceProperties.setDriverClassName(environment.getProperty(prefix+"driver-class-name"));
+        dataSourceProperties.setUrl(environment.getProperty(prefix+"url"));
+        return dataSourceProperties;
     }
 }

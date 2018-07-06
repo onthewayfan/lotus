@@ -12,13 +12,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DBConfigTest {
 
-    @Autowired
+    @Resource
     private MyDataSourceProperties  dataSourceProperties ;
 
     @Value("${custom.datasource.names}")

@@ -31,15 +31,6 @@ public class UserController {
 		return  userService.getUserJDBC();
 	}
 	
-	@RequestMapping("/getChinaMap")
-	public List<Map<String, Object>> getChinaMap(){
-		
-		logger.info("getuser");
-		
-		return  userService.getChinaMap();
-	}
-	
-	
 	@RequestMapping("/getUserList")
 	public List<UserDto> getUserList(){
 		
@@ -56,5 +47,6 @@ public class UserController {
 		
 		return  userService.getUserInfo(id);
 	}
+
 
 }

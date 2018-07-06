@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lotus.sys.dao.UserDao;
-import com.lotus.sys.dao.UserDaoJDBC;
+import com.lotus.sys.dao.jdbc.UserDaoJDBC;
 import com.lotus.sys.dto.UserDto;
 import com.lotus.sys.service.UserService;
 
@@ -17,10 +17,9 @@ import com.lotus.sys.service.UserService;
 @Service
 public class UserSeviceImpl implements UserService{
 
-	
 	@Autowired //自动装配
 	private UserDaoJDBC userDaoJDBC;
-	
+
 	@Autowired //自动装配
 	private UserDao userDao;
 	
@@ -35,14 +34,7 @@ public class UserSeviceImpl implements UserService{
 		
 		return mapList;
 	}
-    @Override
-	public List<Map<String,Object>> getChinaMap(){
-		List<Map<String,Object>> mapList = null;
-		
-		mapList = userDaoJDBC.getChinaMapJdbc();
-		
-		return mapList;
-	}
+
 	@Override
 	public List<UserDto> getUserList(){
 		List<UserDto> mapList = null;
@@ -58,5 +50,6 @@ public class UserSeviceImpl implements UserService{
 		
 		return userInfo;
 	}
+
     
 }

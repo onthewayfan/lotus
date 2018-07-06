@@ -17,7 +17,7 @@ buildscript {
         springMilestoneRepo = "http://repo.spring.io/milestone"
 
         springBootVersion = "2.1.0.BUILD-SNAPSHOT"
-        hadoopVersion = "2.9.0"
+        hadoopVersion = "3.1.0"
         poiVersion = "3.14"
     }
     //闭包，声明了jcenter()的配置
@@ -47,9 +47,11 @@ def vJavaLang = '1.8'
 
 wrapper.gradleVersion = '4.8'
 
+group 'lotus'
+version '1.0.0.BUILD-SNAPSHOT'
+
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-version = '1.0.0.BUILD-SNAPSHOT'
 
 //使用 xxx
 apply plugin: 'java'
@@ -62,11 +64,10 @@ targetCompatibility = vJavaLang
 //apply plugin: 'war'
 //war {
 //    baseName = 'lotus'
-//   version =  version
+//   version =  '1.0.0.BUILD-SNAPSHOT'
 //}
 jar {
     baseName = 'lotus'
-    version =  version
 }
 
 repositories {
@@ -96,7 +97,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-devtools:$springBootVersion" 
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion"
     
-    //compile "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion"
  	//compile "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
     //compile "org.springframework.session:spring-session-data-redis"
@@ -151,17 +152,18 @@ dependencies {
     compile group: 'org.apache.activemq', name: 'activemq-spring', version: '5.15.4'
 
     //hadoop
-    //compile group: 'org.apache.hadoop', name: 'hadoop-common', version: "$hadoopVersion"
-    //compile group: 'org.apache.hadoop', name: 'hadoop-core', version: "0.20.2"
-    //compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: "$hadoopVersion"
-    
-    //compile group: 'org.apache.hadoop', name: 'hadoop-client', version: "$hadoopVersion"
-    
-    //compile ("org.apache.hadoop:hadoop-client:$hadoopVersion"){
-    //   exclude group: 'org.slf4j',module: 'slf4j-log4j12'
-    //}
-   //compile group: 'org.apache.hadoop', name: 'hadoop-mapreduce-client-core', version: "$hadoopVersion"
-   
+//    compile group: 'org.apache.hadoop', name: 'hadoop-common', version: "$hadoopVersion"
+//    compile group: 'org.apache.hadoop', name: 'hadoop-core', version: "1.2.1"
+//    compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: "$hadoopVersion"
+//    compile group: 'org.apache.hadoop', name: 'hadoop-client', version: "$hadoopVersion"
+////    compile ("org.apache.hadoop:hadoop-client:$hadoopVersion"){
+////       exclude group: 'org.slf4j',module: 'slf4j-log4j12'
+////    }
+//    compile group: 'org.apache.hadoop', name: 'hadoop-mapreduce-client-core', version: "$hadoopVersion"
+
+    //dubbo
+//    compile group: 'com.alibaba.boot', name: 'dubbo-spring-boot-starter', version: '0.2.0'
+
 
     //testCompile
     testCompile("junit:junit:4.12") {
